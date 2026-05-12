@@ -7,7 +7,6 @@ const cors = require('cors')
 const app = express()
 app.use(express.json())
 app.use(cors())
-app.use(express.static('dist'))
 
 morg = morgan(function (tokens, req, res) {
   let r =  [
@@ -23,6 +22,10 @@ morg = morgan(function (tokens, req, res) {
   return(r.join(' '))
 })
 app.use(morg)
+
+app.use(express.static('dist'))
+
+
 
 
 let luettelo = [
