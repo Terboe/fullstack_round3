@@ -3,8 +3,11 @@ const http = require('http')
 const express = require( 'express')
 const { time } = require('console')
 const morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 app.use(express.json())
+app.use(cors())
+
 
 morg = morgan(function (tokens, req, res) {
   let r =  [
@@ -20,6 +23,8 @@ morg = morgan(function (tokens, req, res) {
   return(r.join(' '))
 })
 app.use(morg)
+
+
 let luettelo = [
   {
     id: "1",
@@ -105,7 +110,7 @@ app.post('/api/persons', (request,response) =>{
 })
 
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
